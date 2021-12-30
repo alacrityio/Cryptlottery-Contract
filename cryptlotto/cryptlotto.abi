@@ -1,0 +1,294 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "alaio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "cleanup",
+            "base": "",
+            "fields": [
+                {
+                    "name": "game",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "creategame",
+            "base": "",
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "string"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "name": "image",
+                    "type": "string"
+                },
+                {
+                    "name": "ends",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "price",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "currency_stats",
+            "base": "",
+            "fields": [
+                {
+                    "name": "supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "max_supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "issuer",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "deletegame",
+            "base": "",
+            "fields": [
+                {
+                    "name": "game",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "emptytables",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "game",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "title",
+                    "type": "string"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "name": "ends",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "price",
+                    "type": "asset"
+                },
+                {
+                    "name": "winnings",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "getendgames",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "hash",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "hash",
+                    "type": "checksum256"
+                }
+            ]
+        },
+        {
+            "name": "referral",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "referrals",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "submithash",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "game",
+                    "type": "uint64"
+                },
+                {
+                    "name": "hash",
+                    "type": "checksum256"
+                }
+            ]
+        },
+        {
+            "name": "submitsecret",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "game",
+                    "type": "uint64"
+                },
+                {
+                    "name": "secret",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "ticket",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "user",
+                    "type": "name"
+                },
+                {
+                    "name": "secret",
+                    "type": "string"
+                },
+                {
+                    "name": "hash",
+                    "type": "checksum256"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "cleanup",
+            "type": "cleanup",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "creategame",
+            "type": "creategame",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Create Game\nsummary: When this action is called by the contract owner it will create a game. the ending time cannot be before now UTC and price should match asset you want to the game to be played in e.g: price -> \"0.0500 SYS\".\nicon:"
+        },
+        {
+            "name": "deletegame",
+            "type": "deletegame",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Delete Game\nsummary: When this action is called by the contract owner it will delete the game and refund tickets to the users.\nicon:"
+        },
+        {
+            "name": "emptytables",
+            "type": "emptytables",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Empty Games Table tickets and hashes\nsummary: For testing Empty games table\nicon:"
+        },
+        {
+            "name": "getendgames",
+            "type": "getendgames",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Get Ending Games\nsummary: This action when called with the contract account will Get all games past their ending cryteria and reveal winner of the games and pay them their winnings. the winner of the game is calculated by sha256({ticket_id, user, secret, hash}, length).\nicon:"
+        },
+        {
+            "name": "submithash",
+            "type": "submithash",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Submit Hash\nsummary: The user must call this action fist to submit a secret and hash, then they can purchase tickets in which the secret and hash is assigned to those tickets. I a user wants to buy more tickets after the fact they have to re submit a secret and hash, can be same set or different.\nicon:"
+        },
+        {
+            "name": "submitsecret",
+            "type": "submitsecret",
+            "ricardian_contract": "---\nspec-version: 0.0.2\ntitle: Submit Secret\nsummary: Submit your secret to allow the contract to use your ticket in the RNG process.\nicon:"
+        }
+    ],
+    "tables": [
+        {
+            "name": "games",
+            "type": "game",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "hashes",
+            "type": "hash",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "referrals",
+            "type": "referral",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "stat",
+            "type": "currency_stats",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "tickets",
+            "type": "ticket",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [
+        {
+            "id": "Data Storage",
+            "body": "---\nspec-version: 0.0.1\ntitle: General Data Storage\nsummary: This smart contract will store data added by the user. The user consents to the storage of this data by signing the transaction.\nicon:"
+        },
+        {
+            "id": "Data Usage",
+            "body": "---\nspec-version: 0.0.1\ntitle: General Data Use\nsummary: This smart contract will store user data. The smart contract will not use the stored data for any purpose outside store and delete.\nicon:"
+        },
+        {
+            "id": "Data Ownership",
+            "body": "---\nspec-version: 0.0.1\ntitle: Data Ownership\nsummary: The user of this smart contract verifies that the data is owned by the smart contract, and that the smart contract can use the data in accordance to the terms defined in the Ricardian Contract.\nicon:"
+        },
+        {
+            "id": "Data Distirbution",
+            "body": "---\nspec-version: 0.0.1\ntitle: Data Distirbution\nsummary: The smart contract promises to not actively share or distribute the address data. The user of the smart contract understands that data stored in a multi index table is not private data and can be accessed by any user of the blockchain.  \nicon:"
+        },
+        {
+            "id": "Data Future",
+            "body": "---\nspec-version: 0.0.1\ntitle: Data Future\nsummary: The smart contract promises to only use the data in accordance of the terms defined in the Ricardian Contract, now and at all future dates.\nicon:"
+        }
+    ],
+    "variants": []
+}
